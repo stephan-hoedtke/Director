@@ -3,7 +3,7 @@ package com.stho.director
 /**
  * A low pass filter for a 3-vector of angles
  */
-internal class LowPassFilter(private val timeConstant: Double = 0.2, private val timeSource: TimeSource = SystemClockTimeSource()) {
+internal class LowPassFilter(private val timeConstant: Double = 0.1, private val timeSource: TimeSource = SystemClockTimeSource()) {
 
     private val vector: Vector = Vector(0.0, 0.0, 9.78)
     private var startTime: Double = 0.0

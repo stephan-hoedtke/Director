@@ -22,6 +22,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <FrameLayout
+        android:id="@+id/frame"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="20dp"
@@ -67,6 +68,58 @@
             android:src="@drawable/orange_point" />
 
     </FrameLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.50" />
+
+    <TextView
+        android:id="@+id/labelPitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pitch:"
+        app:layout_constraintTop_toBottomOf="@id/frame"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/guideline1"
+        android:layout_marginHorizontal="7dp"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:id="@+id/textViewPitch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="13°"
+        app:layout_constraintTop_toTopOf="@id/labelPitch"
+        app:layout_constraintBottom_toBottomOf="@id/labelPitch"
+        app:layout_constraintStart_toStartOf="@id/guideline1"
+        android:layout_marginHorizontal="7dp"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:id="@+id/labelAzimuth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Azimuth:"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/frame"
+        app:layout_constraintEnd_toEndOf="@id/guideline1"
+        android:layout_marginHorizontal="7dp"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:id="@+id/textViewAzimuth"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="123° N"
+        app:layout_constraintTop_toTopOf="@id/labelAzimuth"
+        app:layout_constraintBottom_toBottomOf="@id/labelAzimuth"
+        app:layout_constraintStart_toStartOf="@id/guideline1"
+        android:layout_marginHorizontal="7dp"
+        android:textColor="@color/white" />
+
 
 
 

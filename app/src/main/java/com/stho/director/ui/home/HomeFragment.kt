@@ -8,6 +8,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.stho.director.Angle
 import com.stho.director.Degree
 import com.stho.director.Orientation
 import com.stho.director.R
@@ -62,5 +63,7 @@ class HomeFragment : Fragment() {
         binding.redPoint.alpha = 1 - alpha
         binding.grid.alpha = if (z > 0) 0.5f else 1.0f
 
+        binding.textViewAzimuth.text = Angle.toString(orientation.azimuth, Angle.AngleType.AZIMUTH)
+        binding.textViewPitch.text = Angle.toString(orientation.pitch, Angle.AngleType.PITCH)
     }
 }

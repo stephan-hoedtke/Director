@@ -19,9 +19,9 @@ class OrientationAccelerationFilter: OrientationFilter {
     override var updateCounter: Long = 0L
         private set
 
-    private val azimuthAcceleration: Acceleration = Acceleration(1.2)
-    private val pitchAcceleration: Acceleration = Acceleration(0.7)
-    private val rollAcceleration: Acceleration = Acceleration(0.7)
+    private val azimuthAcceleration: Acceleration = Acceleration(0.5)
+    private val pitchAcceleration: Acceleration = Acceleration(0.5)
+    private val rollAcceleration: Acceleration = Acceleration(0.5)
     private val lowPassFilter: LowPassFilter = LowPassFilter()
 
     override val currentOrientation: Orientation
