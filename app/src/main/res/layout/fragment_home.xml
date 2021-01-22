@@ -66,6 +66,27 @@
             android:translationY="50dp"
             android:alpha="0.7"
             android:src="@drawable/orange_point" />
+        
+        <ImageView
+            android:id="@+id/yellowPoint"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:translationX="20dp"
+            android:translationY="-30dp"
+            android:src="@drawable/yellow_point" />
+
+        <ImageView
+            android:id="@+id/star"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:adjustViewBounds="true"
+            android:scaleType="fitCenter"
+            android:translationX="-40dp"
+            android:translationY="-30dp"
+            android:src="@drawable/star" />
+
 
     </FrameLayout>
 
@@ -80,7 +101,7 @@
         android:id="@+id/labelPitch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Pitch:"
+        android:text="@string/label_pitch_colon"
         app:layout_constraintTop_toBottomOf="@id/frame"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/guideline1"
@@ -91,9 +112,30 @@
         android:id="@+id/textViewPitch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="13°"
+        android:text="@string/default_pitch"
         app:layout_constraintTop_toTopOf="@id/labelPitch"
         app:layout_constraintBottom_toBottomOf="@id/labelPitch"
+        app:layout_constraintStart_toStartOf="@id/guideline1"
+        android:layout_marginHorizontal="7dp"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:id="@+id/labelRoll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/label_roll_colon"
+        app:layout_constraintTop_toBottomOf="@id/labelPitch"
+        app:layout_constraintEnd_toEndOf="@id/guideline1"
+        android:layout_marginHorizontal="7dp"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:id="@+id/textViewRoll"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/default_roll"
+        app:layout_constraintTop_toTopOf="@id/labelRoll"
+        app:layout_constraintBottom_toBottomOf="@id/labelRoll"
         app:layout_constraintStart_toStartOf="@id/guideline1"
         android:layout_marginHorizontal="7dp"
         android:textColor="@color/white" />
@@ -102,9 +144,8 @@
         android:id="@+id/labelAzimuth"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Azimuth:"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/frame"
+        android:text="@string/label_azimuth_colon"
+        app:layout_constraintBottom_toTopOf="@id/labelPitch"
         app:layout_constraintEnd_toEndOf="@id/guideline1"
         android:layout_marginHorizontal="7dp"
         android:textColor="@color/white" />
@@ -113,13 +154,56 @@
         android:id="@+id/textViewAzimuth"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="123° N"
+        android:text="@string/default_azimuth"
         app:layout_constraintTop_toTopOf="@id/labelAzimuth"
         app:layout_constraintBottom_toBottomOf="@id/labelAzimuth"
         app:layout_constraintStart_toStartOf="@id/guideline1"
         android:layout_marginHorizontal="7dp"
         android:textColor="@color/white" />
 
+    <TextView
+        android:id="@+id/labelCenter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/label_center_colon"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/frame"
+        app:layout_constraintEnd_toEndOf="@id/guideline1"
+        android:layout_marginHorizontal="7dp"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:id="@+id/textViewCenter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/default_azimuth_altitude"
+        app:layout_constraintTop_toTopOf="@id/labelCenter"
+        app:layout_constraintBottom_toBottomOf="@id/labelCenter"
+        app:layout_constraintStart_toStartOf="@id/guideline1"
+        android:layout_marginHorizontal="7dp"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:id="@+id/labelPointer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/label_pointer_colon"
+        app:layout_constraintTop_toBottomOf="@id/labelCenter"
+        app:layout_constraintEnd_toEndOf="@id/guideline1"
+        android:layout_marginTop="@dimen/vertical_paragraph_margin"
+        android:layout_marginHorizontal="7dp"
+        android:textColor="@color/white" />
+
+    <TextView
+        android:id="@+id/textViewPointer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/default_azimuth_altitude"
+        app:layout_constraintTop_toTopOf="@id/labelPointer"
+        app:layout_constraintBottom_toBottomOf="@id/labelPointer"
+        app:layout_constraintStart_toStartOf="@id/guideline1"
+        android:layout_marginHorizontal="7dp"
+        android:textColor="@color/white" />
 
 
 

@@ -24,35 +24,66 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 app:layout_constraintTop_toTopOf="parent"
-                android:layout_marginHorizontal="20dp">
+                android:layout_marginHorizontal="@dimen/horizontal_paragraph_margin">
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Orientation:"
-                    android:layout_marginTop="20dp"
+                    android:text="@string/label_pointer_colon"
+                    android:layout_marginTop="@dimen/vertical_paragraph_margin"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:id="@+id/textViewPointer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/default_center"
+                    android:layout_marginTop="@dimen/vertical_line_margin"
+                    android:layout_marginHorizontal="@dimen/horizontal_line_margin"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label_center_colon"
+                    android:layout_marginTop="@dimen/vertical_paragraph_margin"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:id="@+id/textViewCenter"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/default_center"
+                    android:layout_marginTop="@dimen/vertical_line_margin"
+                    android:layout_marginHorizontal="@dimen/horizontal_line_margin"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label_orientation_colon"
+                    android:layout_marginTop="@dimen/vertical_paragraph_margin"
                     android:textColor="@color/white" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginHorizontal="30dp">
+                    android:layout_marginTop="@dimen/vertical_line_margin"
+                    android:layout_marginHorizontal="@dimen/horizontal_line_margin">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="@dimen/label_size"
                         android:layout_height="wrap_content"
-                        android:text="Pitch:"
-                        android:layout_marginEnd="20dp"
+                        android:text="@string/label_pitch_colon"
                         android:textColor="@color/white" />
 
                     <TextView
                         android:id="@+id/textViewPitch"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="30°"
-                        android:layout_marginEnd="20dp"
+                        android:text="@string/default_pitch"
+                        android:layout_marginEnd="@dimen/horizontal_line_margin"
                         android:textColor="@color/white" />
 
                 </LinearLayout>
@@ -61,22 +92,21 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginHorizontal="30dp">
+                    android:layout_marginTop="@dimen/vertical_line_margin"
+                    android:layout_marginHorizontal="@dimen/horizontal_line_margin">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="@dimen/label_size"
                         android:layout_height="wrap_content"
-                        android:text="Direction:"
-                        android:layout_marginEnd="20dp"
+                        android:text="@string/label_direction_colon"
                         android:textColor="@color/white" />
 
                     <TextView
                         android:id="@+id/textViewDirection"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="135°"
-                        android:layout_marginEnd="20dp"
+                        android:text="@string/default_direction"
+                        android:layout_marginEnd="@dimen/horizontal_line_gap"
                         android:textColor="@color/white" />
 
                 </LinearLayout>
@@ -85,22 +115,21 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginHorizontal="30dp">
+                    android:layout_marginTop="@dimen/vertical_line_margin"
+                    android:layout_marginHorizontal="@dimen/horizontal_line_margin">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="@dimen/label_size"
                         android:layout_height="wrap_content"
-                        android:text="Azimuth:"
-                        android:layout_marginEnd="20dp"
+                        android:text="@string/label_azimuth_colon"
                         android:textColor="@color/white" />
 
                     <TextView
                         android:id="@+id/textViewAzimuth"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="34° NE"
-                        android:layout_marginEnd="20dp"
+                        android:text="@string/default_azimuth"
+                        android:layout_marginEnd="@dimen/horizontal_line_gap"
                         android:textColor="@color/white" />
 
                 </LinearLayout>
@@ -109,22 +138,21 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginHorizontal="30dp">
+                    android:layout_marginTop="@dimen/vertical_line_margin"
+                    android:layout_marginHorizontal="@dimen/horizontal_line_margin">
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="@dimen/label_size"
                         android:layout_height="wrap_content"
-                        android:text="Roll:"
-                        android:layout_marginEnd="20dp"
+                        android:text="@string/label_roll_colon"
                         android:textColor="@color/white" />
 
                     <TextView
                         android:id="@+id/textViewRoll"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="-13°"
-                        android:layout_marginEnd="20dp"
+                        android:text="@string/default_roll"
+                        android:layout_marginEnd="@dimen/horizontal_line_gap"
                         android:textColor="@color/white" />
 
                 </LinearLayout>
@@ -132,60 +160,201 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Gravity"
-                    android:layout_marginTop="20dp"
+                    android:text="@string/label_north"
+                    android:layout_marginTop="@dimen/vertical_paragraph_margin"
                     android:textColor="@color/white" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginHorizontal="30dp">
+                    android:layout_marginTop="@dimen/vertical_line_margin"
+                    android:layout_marginHorizontal="@dimen/horizontal_line_margin">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="x="
+                        android:text="@string/label_x"
+                        android:textColor="@color/white" />
+
+                    <TextView
+                        android:id="@+id/textViewNorthX"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/label_default_coordinate"
+                        android:layout_marginEnd="@dimen/horizontal_line_gap"
+                        android:textColor="@color/white" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/label_y"
+                        android:textColor="@color/white" />
+
+                    <TextView
+                        android:id="@+id/textViewNorthY"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/label_default_coordinate"
+                        android:layout_marginEnd="@dimen/horizontal_line_gap"
+                        android:textColor="@color/white" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/label_z"
+                        android:textColor="@color/white" />
+
+                    <TextView
+                        android:id="@+id/textViewNorthZ"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/label_default_coordinate"
+                        android:layout_marginEnd="@dimen/horizontal_line_gap"
+                        android:textColor="@color/white" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label_gravity"
+                    android:layout_marginTop="@dimen/vertical_paragraph_margin"
+                    android:textColor="@color/white" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="@dimen/vertical_line_margin"
+                    android:layout_marginHorizontal="@dimen/horizontal_line_margin">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/label_x"
                         android:textColor="@color/white" />
 
                     <TextView
                         android:id="@+id/textViewGravityX"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="0.1234"
-                        android:layout_marginEnd="20dp"
+                        android:text="@string/label_default_coordinate"
+                        android:layout_marginEnd="@dimen/horizontal_line_gap"
                         android:textColor="@color/white" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="y="
+                        android:text="@string/label_y"
                         android:textColor="@color/white" />
 
                     <TextView
                         android:id="@+id/textViewGravityY"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="0.1234"
-                        android:layout_marginEnd="20dp"
+                        android:text="@string/label_default_coordinate"
+                        android:layout_marginEnd="@dimen/horizontal_line_gap"
                         android:textColor="@color/white" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="z="
+                        android:text="@string/label_z"
                         android:textColor="@color/white" />
 
                     <TextView
                         android:id="@+id/textViewGravityZ"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="0.1234"
-                        android:layout_marginEnd="20dp"
+                        android:text="@string/label_default_coordinate"
+                        android:layout_marginEnd="@dimen/horizontal_line_gap"
                         android:textColor="@color/white" />
 
                 </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label_star"
+                    android:layout_marginTop="@dimen/vertical_paragraph_margin"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:id="@+id/textViewStarPosition"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/default_azimuth_altitude"
+                    android:layout_marginTop="@dimen/vertical_line_margin"
+                    android:layout_marginHorizontal="@dimen/horizontal_line_margin"
+                    android:textColor="@color/white" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="@dimen/vertical_line_margin"
+                    android:layout_marginHorizontal="@dimen/horizontal_line_margin">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/label_x"
+                        android:textColor="@color/white" />
+
+                    <TextView
+                        android:id="@+id/textViewStarX"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/label_default_coordinate"
+                        android:layout_marginEnd="@dimen/horizontal_line_gap"
+                        android:textColor="@color/white" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/label_y"
+                        android:textColor="@color/white" />
+
+                    <TextView
+                        android:id="@+id/textViewStarY"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/label_default_coordinate"
+                        android:layout_marginEnd="@dimen/horizontal_line_gap"
+                        android:textColor="@color/white" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/label_z"
+                        android:textColor="@color/white" />
+
+                    <TextView
+                        android:id="@+id/textViewStarZ"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/label_default_coordinate"
+                        android:layout_marginEnd="@dimen/horizontal_line_gap"
+                        android:textColor="@color/white" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label_location_colon"
+                    android:layout_marginTop="@dimen/vertical_paragraph_margin"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:id="@+id/textViewLocation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/default_location"
+                    android:layout_marginTop="@dimen/vertical_line_margin"
+                    android:layout_marginHorizontal="@dimen/horizontal_line_margin"
+                    android:textColor="@color/white" />
 
                 <Space
                     android:layout_width="match_parent"

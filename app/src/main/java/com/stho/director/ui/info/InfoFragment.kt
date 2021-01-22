@@ -1,17 +1,13 @@
 package com.stho.director.ui.info
 
+import android.location.Location
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.stho.director.Angle
-import com.stho.director.Formatter
-import com.stho.director.Orientation
-import com.stho.director.R
+import com.stho.director.*
 import com.stho.director.databinding.FragmentInfoBinding
 
 class InfoFragment : Fragment() {
@@ -29,6 +25,12 @@ class InfoFragment : Fragment() {
         bindingReference = FragmentInfoBinding.inflate(inflater, container, false)
 
         viewModel.orientationLD.observe(viewLifecycleOwner, { orientation -> onObserveOrientation(orientation) })
+        viewModel.locationLD.observe(viewLifecycleOwner, { location -> onObserveLocation(location) })
+        viewModel.northVectorLD.observe(viewLifecycleOwner, { vector -> onObserveNorthVector(vector) })
+        viewModel.gravityVectorLD.observe(viewLifecycleOwner, { vector -> onObserveGravityVector(vector) })
+        viewModel.starLD.observe(viewLifecycleOwner, { star -> onObserveStar(star) })
+        viewModel.centerLD.observe(viewLifecycleOwner, { center -> onObserverCenter(center) })
+        viewModel.pointerLD.observe(viewLifecycleOwner, { pointer -> onObserverPointer(pointer) })
 
         return binding.root
     }
@@ -47,8 +49,35 @@ class InfoFragment : Fragment() {
         binding.textViewDirection.text = Angle.toString(orientation.direction, Angle.AngleType.ALTITUDE)
         binding.textViewPitch.text = Angle.toString(orientation.pitch, Angle.AngleType.ALTITUDE)
         binding.textViewRoll.text = Angle.toString(orientation.roll, Angle.AngleType.ROLL)
-        binding.textViewGravityX.text = Formatter.df0.format(orientation.gravity.x)
-        binding.textViewGravityY.text = Formatter.df0.format(orientation.gravity.y)
-        binding.textViewGravityZ.text = Formatter.df0.format(orientation.gravity.z)
+    }
+
+    private fun onObserveLocation(location: LongitudeLatitude) {
+        binding.textViewLocation.text = location.toString()
+    }
+
+    private fun onObserveNorthVector(vector: Vector) {
+        binding.textViewNorthX.text = Formatter.df2.format(vector.x)
+        binding.textViewNorthY.text = Formatter.df2.format(vector.y)
+        binding.textViewNorthZ.text = Formatter.df2.format(vector.z)
+    }
+
+    private fun onObserveGravityVector(vector: Vector) {
+        binding.textViewGravityX.text = Formatter.df2.format(vector.x)
+        binding.textViewGravityY.text = Formatter.df2.format(vector.y)
+        binding.textViewGravityZ.text = Formatter.df2.format(vector.z)
+    }
+
+    private fun onObserveStar(star: Star) {
+        binding.textViewStarX.text = Formatter.df2.format(star.phone.x)
+        binding.textViewStarY.text = Formatter.df2.format(star.phone.y)
+        binding.textViewStarZ.text = Formatter.df2.format(star.phone.z)
+    }
+
+    private fun onObserverCenter(center: AzimuthAltitude) {
+        binding.textViewCenter.text = Angle.toString(center.azimuth, center.altitude, Angle.AngleType.ORIENTATION)
+    }
+
+    private fun onObserverPointer(pointer: AzimuthAltitude) {
+        binding.textViewPointer.text = Angle.toString(pointer.azimuth, pointer.altitude, Angle.AngleType.ORIENTATION)
     }
 }

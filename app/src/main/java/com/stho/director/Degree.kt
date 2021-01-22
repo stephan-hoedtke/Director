@@ -49,23 +49,6 @@ class Degree {
         fun fromNegative(degree: Int, minute: Int, seconds: Double): Degree =
             Degree(-1, abs(degree), minute, seconds)
 
-        private val pattern = Pattern.compile("^([+|−|-|–|-])(\\d+)[°]\\s(\\d+)[′|']\\s(\\d+[.]*\\d*)$") // for:  −11° 09′ 40.5
-
-        fun fromDegree(str: String): Degree {
-            val m = pattern.matcher(str)
-            if (m.find() && m.groupCount() == 4) {
-                val degree: Int= m.group(2)?.toInt() ?: 0
-                val minute: Int= m.group(3)?.toInt() ?: 0
-                val seconds: Double = m.group(4)?.toDouble() ?: 0.0
-                return if (m.group(1) == "+") {
-                    fromPositive(degree, minute, seconds)
-                } else {
-                    fromNegative(degree, minute, seconds)
-                }
-            }
-            throw InvalidParameterException("Invalid degree $str")
-        }
-
         fun fromRadian(angleInRadian: Double): Degree =
             Degree(Math.toDegrees(angleInRadian))
 

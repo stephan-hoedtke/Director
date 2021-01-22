@@ -5,4 +5,10 @@
     <dimen name="nav_header_vertical_spacing">8dp</dimen>
     <dimen name="nav_header_height">176dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
+    <dimen name="vertical_line_margin">7dp</dimen>
+    <dimen name="vertical_paragraph_margin">15dp</dimen>
+    <dimen name="horizontal_line_margin">30dp</dimen>
+    <dimen name="horizontal_line_gap">20dp</dimen>
+    <dimen name="horizontal_paragraph_margin">20dp</dimen>
+    <dimen name="label_size">100dp</dimen>
 </resources>

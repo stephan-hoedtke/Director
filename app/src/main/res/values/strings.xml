@@ -6,7 +6,28 @@
     <string name="nav_header_subtitle">Display 3-D Compass</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
-
     <string name="menu_home">Home</string>
     <string name="menu_info">Info</string>
+    <string name="label_center_colon">Center:</string>
+    <string name="default_center">129°N 23°</string>
+    <string name="label_orientation_colon">Orientation:</string>
+    <string name="label_pitch_colon">Pitch:</string>
+    <string name="default_pitch">30°</string>
+    <string name="label_direction_colon">Direction:</string>
+    <string name="default_direction">135°</string>
+    <string name="label_azimuth_colon">Azimuth:</string>
+    <string name="default_azimuth">34° NE</string>
+    <string name="label_roll_colon">Roll:</string>
+    <string name="default_roll">-13°</string>
+    <string name="label_north">North</string>
+    <string name="label_x">x=</string>
+    <string name="label_default_coordinate">0.1234</string>
+    <string name="label_y">y=</string>
+    <string name="label_z">z=</string>
+    <string name="label_gravity">Gravity</string>
+    <string name="label_star">Star</string>
+    <string name="default_azimuth_altitude">123°W 23°</string>
+    <string name="label_pointer_colon">Pointer:</string>
+    <string name="label_location_colon">Location:</string>
+    <string name="default_location">13° 52°</string>
 </resources>

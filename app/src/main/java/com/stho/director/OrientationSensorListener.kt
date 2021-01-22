@@ -69,8 +69,9 @@ class OrientationSensorListener(private val context: Context, private val filter
     // the device's accelerometer and magnetometer.
     private fun updateOrientationAngles() {
         if (SensorManager.getRotationMatrix(rotationMatrix, null, accelerometerReading, magnetometerReading)) {
-            SensorManager.getOrientation(getAdjustedRotationMatrix(), orientationAngles)
-            filter.onOrientationAnglesChanged(orientationAngles)
+            val adjustedRotationMatrix = getAdjustedRotationMatrix()
+            SensorManager.getOrientation(adjustedRotationMatrix, orientationAngles)
+            filter.onOrientationAnglesChanged(adjustedRotationMatrix, orientationAngles)
         }
     }
 
