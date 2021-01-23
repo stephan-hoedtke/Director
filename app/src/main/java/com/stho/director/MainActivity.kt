@@ -78,7 +78,7 @@ class MainActivity : AppCompatActivity(), IOrientationFilter {
         locationRequest = LocationRequest.create()
             .setPriority(LocationRequest.PRIORITY_LOW_POWER)
             .setInterval(10 * 1000)        // 10 seconds, in milliseconds
-            .setFastestInterval(1 * 1000); // 1 second, in milliseconds
+            .setFastestInterval(1 * 1000) // 1 second, in milliseconds
 
         locationCallback = object : LocationCallback() {
             override fun onLocationResult(locationResult: LocationResult?) {
@@ -194,7 +194,7 @@ class MainActivity : AppCompatActivity(), IOrientationFilter {
     private fun onUpdateLocation(location: Location) {
         if (!repository.updateLocation(location)) {
             stopLocationUpdates()
-            showSnackbar("Location updates stopped.")
+            showSnackbar("Location done.")
         }
     }
 

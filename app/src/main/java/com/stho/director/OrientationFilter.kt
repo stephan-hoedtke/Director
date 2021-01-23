@@ -59,12 +59,16 @@ class OrientationAccelerationFilter: IOrientationFilter {
 
         val angles: DoubleArray = doubleArrayOf(
             Degree.arcTan2(R[1].toDouble(), R[4].toDouble()),
-            Degree.arcSin(-R[7].toDouble()),
+            Degree.arcSin(R[7].toDouble()),
             Degree.arcTan2(-R[6].toDouble(), R[8].toDouble()),
             Degree.arcTan2(-R[2].toDouble(), -R[5].toDouble()),
             Degree.arcSin(-R[8].toDouble()))
 
-        lowPassFilter.setAngles(angles)
+        if (lookAtThePhoneFromAbove(angles[2])) {
+            lowPassFilter.setAngles(angles)
+        } else {
+            lowPassFilter.setAngles(adjustForLookingAtThePhoneFromBelow(angles))
+        }
 
         pointerAzimuthAcceleration.rotateTo(lowPassFilter.angles[0])
         pointerAltitudeAcceleration.rotateTo(lowPassFilter.angles[1])
@@ -72,6 +76,17 @@ class OrientationAccelerationFilter: IOrientationFilter {
         centerAzimuthAcceleration.rotateTo(lowPassFilter.angles[3])
         centerAltitudeAcceleration.rotateTo(lowPassFilter.angles[4])
     }
+
+    private fun lookAtThePhoneFromAbove(roll: Double) =
+         -90 < roll && roll < 90
+
+    private fun adjustForLookingAtThePhoneFromBelow(angles: DoubleArray): DoubleArray =
+            doubleArrayOf(
+                    -angles[0],
+                    180 - angles[1],
+                    180 - angles[2],
+                    angles[3],
+                    angles[4])
 
 }
 

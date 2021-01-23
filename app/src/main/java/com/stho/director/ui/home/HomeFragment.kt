@@ -44,7 +44,7 @@ class HomeFragment : Fragment() {
         binding.textViewAzimuth.text = Angle.toString(orientation.pointerAzimuth, Angle.AngleType.AZIMUTH)
         binding.textViewPitch.text = Angle.toString(orientation.pointerAltitude, Angle.AngleType.PITCH)
         binding.textViewRoll.text = Angle.toString(orientation.roll, Angle.AngleType.ROLL)
-        binding.textViewCenter.text = Angle.toString(orientation.pointerAzimuth, orientation.pointerAltitude, Angle.AngleType.ORIENTATION)
+        binding.textViewCenter.text = Angle.toString(orientation.centerAzimuth, orientation.centerAltitude, Angle.AngleType.ORIENTATION)
     }
 
     private fun onObserveNorthVector(vector: Vector) {
