@@ -1,6 +1,5 @@
 package com.stho.director
 
-import android.Manifest
 import android.Manifest.permission.ACCESS_COARSE_LOCATION
 import android.annotation.SuppressLint
 import android.content.pm.PackageManager.PERMISSION_GRANTED
@@ -27,7 +26,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 @Suppress("SameParameterValue")
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), IOrientationFilter {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var locationRequest: LocationRequest
@@ -35,8 +34,9 @@ class MainActivity : AppCompatActivity() {
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private val handler: Handler by lazy { Handler(Looper.getMainLooper()) }
     private val algorithms: Algorithms by lazy { Algorithms() }
-    private val orientationFilter: OrientationFilter by lazy { OrientationAccelerationFilter() }
-    private val orientationSensorListener: OrientationSensorListener by lazy { OrientationSensorListener(this, orientationFilter) }
+    private val orientationFilter = OrientationAccelerationFilter()
+    private val elementsFilter = ElementsFilter()
+    private val orientationSensorListener: OrientationSensorListener by lazy { OrientationSensorListener(this, this) }
     private val repository: Repository = Repository.getInstance()
     private val settings: Settings = repository.settings
 
@@ -44,9 +44,35 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setupToolbar()
-        // setupFAB()
         setupAppBar()
+        setupLocationListener()
 
+        repository.locationLD.observe(this, { location -> onObserveLocation(location) })
+    }
+
+    private fun setupToolbar() {
+        val toolbar: Toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
+    }
+
+    private fun setupAppBar() {
+        val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
+        val navView: NavigationView = findViewById(R.id.nav_view)
+        val navController = findNavController(R.id.nav_host_fragment)
+
+        appBarConfiguration = AppBarConfiguration(
+            setOf(
+                R.id.nav_home,
+                R.id.nav_info,
+                R.id.nav_settings
+            ), drawerLayout
+        )
+
+        setupActionBarWithNavController(navController, appBarConfiguration)
+        navView.setupWithNavController(navController)
+    }
+
+    private fun setupLocationListener() {
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
         locationRequest = LocationRequest.create()
@@ -61,43 +87,6 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         }
-
-        repository.locationLD.observe(this, { location -> onObserveLocation(location) })
-    }
-
-    private fun setupToolbar() {
-        val toolbar: Toolbar = findViewById(R.id.toolbar)
-        setSupportActionBar(toolbar)
-    }
-
-//    private fun setupFAB() {
-//        val fab: FloatingActionButton = findViewById(R.id.fab)
-//        fab.setOnClickListener { view ->
-//            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                .setAction("Action", null).show()
-//        }
-//    }
-
-    private fun setupAppBar() {
-        val drawerLayout: DrawerLayout = findViewById(R.id.drawer_layout)
-        val navView: NavigationView = findViewById(R.id.nav_view)
-        val navController = findNavController(R.id.nav_host_fragment)
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.nav_home,
-                R.id.nav_info
-            ), drawerLayout
-        )
-        setupActionBarWithNavController(navController, appBarConfiguration)
-        navView.setupWithNavController(navController)
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.main, menu)
-        return true
     }
 
     override fun onSupportNavigateUp(): Boolean {
@@ -108,6 +97,8 @@ class MainActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
         orientationSensorListener.onResume()
+
+        executeHandlerToUpdateStar()
         executeHandlerToUpdateOrientation()
 
         if (settings.requestLocationUpdates)
@@ -121,10 +112,26 @@ class MainActivity : AppCompatActivity() {
         stopLocationUpdates()
     }
 
-    private fun onSettingsUpdated() {
-        if (settings.showStar) {
-            repository.updateStar(Star(settings.starRightAscension, settings.starDeclination))
+    override fun onOrientationChanged(R: FloatArray) {
+        orientationFilter.onOrientationChanged(R)
+        elementsFilter.onOrientationChanged(R)
+    }
+
+    private fun executeHandlerToUpdateStar() {
+        val runnableCode: Runnable = object : Runnable {
+            override fun run() {
+                CoroutineScope(Dispatchers.Default).launch {
+                    if (settings.showStar) {
+                        settings.star.also { star ->
+                            star.azimuthAltitude = algorithms.getAzimuthAltitudeFor(star.rightAscension, star.declination)
+                            elementsFilter.setStar(star.earth)
+                        }
+                    }
+                }
+                handler.postDelayed(this, 10000)
+            }
         }
+        handler.postDelayed(runnableCode, 200)
     }
 
     private fun executeHandlerToUpdateOrientation() {
@@ -132,21 +139,12 @@ class MainActivity : AppCompatActivity() {
             override fun run() {
                 CoroutineScope(Dispatchers.Default).launch {
                     repository.updateOrientation(orientationFilter.currentOrientation)
-                    // (1, 0, 0) is pointing east
-                    // (0, 1, 0) is pointing north
-                    // (0, 0, 1) is pointing upwards into the sky
-                    repository.updateNorthVector(orientationFilter.rotateFromEarthToPhone(Vector(0.0, 1.0, 0.0)))
-                    repository.updateGravityVector(orientationFilter.rotateFromEarthToPhone(Vector(0.0, 0.0, -1.0)))
-                    repository.updateCenter(orientationFilter.rotateFromPhoneToEarth(Vector(0.0, 0.0, -1.0)))
-                    repository.updatePointer(orientationFilter.rotateFromPhoneToEarth(Vector(0.0, 1.0, 0.0)))
+                    repository.updateNorthVector(elementsFilter.currentNorthVector)
+                    repository.updateGravityVector(elementsFilter.currentGravity)
 
-                     if (settings.showStar) {
-                        val star = repository.star
-                        star.azimuthAltitude = algorithms.getAzimuthAltitudeFor(star.rightAscension, star.declination)
-                        star.phone = orientationFilter.rotateFromEarthToPhone(star.earth)
-                        repository.updateStar(star)
+                    if (settings.showStar) {
+                        repository.updateStarVector(elementsFilter.currentStar)
                     }
-
                 }
                 handler.postDelayed(this, 200)
             }
@@ -194,8 +192,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun onUpdateLocation(location: Location) {
-        repository.updateLocation(location)
-        stopLocationUpdates()
+        if (!repository.updateLocation(location)) {
+            stopLocationUpdates()
+            showSnackbar("Location updates stopped.")
+        }
     }
 
     private fun onObserveLocation(location: LongitudeLatitude) {

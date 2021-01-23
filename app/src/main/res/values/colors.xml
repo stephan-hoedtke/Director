@@ -12,4 +12,6 @@
     <color name="background">#FF070053</color>
     <color name="snackbarBackground">#ff9000</color>
     <color name="snackbarTextColor">#FF070053</color>
+    <color name="buttonBackgroundColor">#FFCCCCFF</color>
+    <color name="buttonTextColor">#FF070053</color>
 </resources>

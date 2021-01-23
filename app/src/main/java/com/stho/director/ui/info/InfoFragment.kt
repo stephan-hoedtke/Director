@@ -28,9 +28,7 @@ class InfoFragment : Fragment() {
         viewModel.locationLD.observe(viewLifecycleOwner, { location -> onObserveLocation(location) })
         viewModel.northVectorLD.observe(viewLifecycleOwner, { vector -> onObserveNorthVector(vector) })
         viewModel.gravityVectorLD.observe(viewLifecycleOwner, { vector -> onObserveGravityVector(vector) })
-        viewModel.starLD.observe(viewLifecycleOwner, { star -> onObserveStar(star) })
-        viewModel.centerLD.observe(viewLifecycleOwner, { center -> onObserverCenter(center) })
-        viewModel.pointerLD.observe(viewLifecycleOwner, { pointer -> onObserverPointer(pointer) })
+        viewModel.starVectorLD.observe(viewLifecycleOwner, { vector -> onObserveStarVector(vector) })
 
         return binding.root
     }
@@ -45,10 +43,10 @@ class InfoFragment : Fragment() {
     }
 
     private fun onObserveOrientation(orientation: Orientation) {
-        binding.textViewAzimuth.text = Angle.toString(orientation.azimuth, Angle.AngleType.AZIMUTH)
-        binding.textViewDirection.text = Angle.toString(orientation.direction, Angle.AngleType.ALTITUDE)
-        binding.textViewPitch.text = Angle.toString(orientation.pitch, Angle.AngleType.ALTITUDE)
+        binding.textViewAzimuth.text = Angle.toString(orientation.pointerAzimuth, Angle.AngleType.AZIMUTH)
+        binding.textViewPitch.text = Angle.toString(orientation.pointerAltitude, Angle.AngleType.ALTITUDE)
         binding.textViewRoll.text = Angle.toString(orientation.roll, Angle.AngleType.ROLL)
+        binding.textViewCenter.text = Angle.toString(orientation.centerAzimuth, orientation.centerAltitude, Angle.AngleType.ORIENTATION)
     }
 
     private fun onObserveLocation(location: LongitudeLatitude) {
@@ -67,17 +65,9 @@ class InfoFragment : Fragment() {
         binding.textViewGravityZ.text = Formatter.df2.format(vector.z)
     }
 
-    private fun onObserveStar(star: Star) {
-        binding.textViewStarX.text = Formatter.df2.format(star.phone.x)
-        binding.textViewStarY.text = Formatter.df2.format(star.phone.y)
-        binding.textViewStarZ.text = Formatter.df2.format(star.phone.z)
-    }
-
-    private fun onObserverCenter(center: AzimuthAltitude) {
-        binding.textViewCenter.text = Angle.toString(center.azimuth, center.altitude, Angle.AngleType.ORIENTATION)
-    }
-
-    private fun onObserverPointer(pointer: AzimuthAltitude) {
-        binding.textViewPointer.text = Angle.toString(pointer.azimuth, pointer.altitude, Angle.AngleType.ORIENTATION)
+    private fun onObserveStarVector(vector: Vector) {
+        binding.textViewStarX.text = Formatter.df2.format(vector.x)
+        binding.textViewStarY.text = Formatter.df2.format(vector.y)
+        binding.textViewStarZ.text = Formatter.df2.format(vector.z)
     }
 }

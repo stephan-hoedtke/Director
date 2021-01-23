@@ -59,10 +59,10 @@ class Algorithms(private var longitude: Double = 0.0, private var latitude: Doub
         internal fun hourToString(angleInHours: Double): String {
             val hours: Double = normalizeHour(angleInHours)
             val hour: Int = hours.toInt()
-            val minutes = 60 * (hours - hour)
-            val minute = minutes.toInt()
-            val seconds = 60 * (minutes - minute)
-            return hour.toString() + "h " + minute + "m " + Formatter.df0.format(seconds) + "s"
+            val minutes: Double = 60 * (hours - hour)
+            val minute: Int = minutes.toInt()
+            val seconds: Double = 60 * (minutes - minute)
+            return hour.toString() + "h " + minute + "m " + Formatter.df2.format(seconds)
         }
 
         private val anglePattern = Pattern.compile("^([+|−|-|–|-])(\\d+)[°]\\s(\\d+)[′|']\\s(\\d+[.]*\\d*)$") // for:  −11° 09′ 40.5
@@ -84,6 +84,17 @@ class Algorithms(private var longitude: Double = 0.0, private var latitude: Doub
 
         private fun getAngle(sign: Int, degree: Int, minute: Int, seconds: Double) =
             sign * (degree + minute / 60.0 + seconds / 3600.0)
+
+        internal fun angleToString(angle: Double): String {
+            val normalizedAngle: Double = Degree.normalizeTo180(angle)
+            val sign: Double = sign(normalizedAngle)
+            val degrees: Double = abs(normalizedAngle)
+            val degree: Int = degrees.toInt()
+            val minutes: Double = 60 * (degrees - degree)
+            val minute: Int = minutes.toInt()
+            val seconds: Double = 60 * (minutes - minute)
+            return (if (sign < 0) "-" else "+") + degree.toString() + "° " + minute + "' " + Formatter.df2.format(seconds)
+        }
 
 
         /**

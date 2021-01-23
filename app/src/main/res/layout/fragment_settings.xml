@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.settings.SettingsFragment">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintGuide_percent="0.15"
+        android:orientation="vertical" />
+
+    <TextView
+        android:id="@+id/labelStar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="@dimen/vertical_paragraph_margin"
+        android:layout_marginHorizontal="@dimen/horizontal_paragraph_margin"
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="@string/label_star" />
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/switchShowStar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/labelStar"
+        android:layout_marginVertical="@dimen/vertical_line_margin"
+        android:layout_marginHorizontal="@dimen/horizontal_line_margin"
+        android:text="@string/label_show_star" />
+
+    <TextView
+        android:id="@+id/labelRightAscension"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/switchShowStar"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginVertical="@dimen/vertical_line_margin"
+        android:layout_marginHorizontal="@dimen/horizontal_line_margin"
+        android:text="@string/label_right_ascension" />
+
+    <EditText
+        android:id="@+id/editRightAscension"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/guideline1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/labelRightAscension"
+        android:text="@string/default_right_ascension"
+        />
+
+    <TextView
+        android:id="@+id/labelDeclination"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/editRightAscension"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginVertical="@dimen/vertical_line_margin"
+        android:layout_marginHorizontal="@dimen/horizontal_line_margin"
+        android:text="@string/label_declination" />
+
+    <EditText
+        android:id="@+id/editDeclination"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="@id/guideline1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/labelDeclination"
+        android:text="@string/default_declination"
+        />
+
+    <TextView
+        android:id="@+id/labelLocation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/horizontal_paragraph_margin"
+        app:layout_constraintTop_toBottomOf="@id/editDeclination"
+        android:layout_marginTop="55dp"
+        android:text="@string/label_location" />
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/switchUpdateLocation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/labelLocation"
+        android:layout_marginVertical="@dimen/vertical_line_margin"
+        android:layout_marginHorizontal="@dimen/horizontal_line_margin"
+        android:text="@string/label_update_location" />
+
+    <ImageView
+        android:id="@+id/orion"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/constellation_orion"
+        app:layout_constraintTop_toBottomOf="@id/switchUpdateLocation"
+        app:layout_constraintBottom_toTopOf="@id/buttonSave"
+        app:layout_constraintStart_toEndOf="@id/urs"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:contentDescription="@string/label_empty" />
+
+    <ImageView
+        android:id="@+id/urs"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/constellation_urs_major"
+        app:layout_constraintTop_toBottomOf="@id/switchUpdateLocation"
+        app:layout_constraintBottom_toTopOf="@id/buttonSave"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/orion"
+        android:contentDescription="@string/label_empty" />
+
+    <Button
+        android:id="@+id/buttonSave"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_margin="@dimen/horizontal_paragraph_margin"
+        android:backgroundTint="@color/buttonBackgroundColor"
+        android:textColor="@color/buttonTextColor"
+        android:text="@string/label_save"/>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

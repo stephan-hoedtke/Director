@@ -1,7 +1,5 @@
 package com.stho.director
 
-import android.view.Gravity
-
 /*******************************************************************************************************
     Orientation:
     - is the direction in which your eyes look into the phone.
@@ -23,17 +21,11 @@ import android.view.Gravity
 /*
     Orientation: azimuth, pitch and roll in Degree
  */
-data class Orientation(val azimuth: Double, val pitch: Double, val direction: Double, val roll: Double, val gravity: IVector) {
-
-    fun getRotationToTargetAt(targetAzimuth: Double): Float =
-        Degree.difference(x = targetAzimuth, y = azimuth).toFloat()
-
-    fun getRotationToNorth(): Float =
-        Degree.normalizeTo180(-azimuth).toFloat()
+data class Orientation(val pointerAzimuth: Double, val pointerAltitude: Double, val roll: Double, val centerAzimuth: Double, val centerAltitude: Double) {
 
     companion object {
         val defaultOrientation: Orientation
-            get() = Orientation(0.0, 0.0, -90.0, 0.0, Vector())
+            get() = Orientation(0.0, 0.0, -10.0, 0.0, centerAltitude = -90.0)
     }
 }
 

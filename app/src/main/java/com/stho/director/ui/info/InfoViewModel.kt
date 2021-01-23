@@ -21,13 +21,7 @@ class InfoViewModel : ViewModel() {
     val gravityVectorLD: LiveData<Vector>
         get() = repository.gravityVectorLD
 
-    val starLD: LiveData<Star>
-        get() = repository.starLD
-
-    val centerLD: LiveData<AzimuthAltitude>
-        get() = repository.centerLD
-
-    val pointerLD: LiveData<AzimuthAltitude>
-        get() = repository.pointerLD
+    val starVectorLD: LiveData<Vector>
+        get() = repository.starVectorLD
 
 }

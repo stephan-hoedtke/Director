@@ -9,7 +9,11 @@ import android.view.Display
 import android.view.Surface
 import android.view.WindowManager
 
-class OrientationSensorListener(private val context: Context, private val filter: OrientationFilter) : SensorEventListener {
+interface IOrientationFilter {
+    fun onOrientationChanged(R: FloatArray)
+}
+
+class OrientationSensorListener(private val context: Context, private val filter: IOrientationFilter) : SensorEventListener {
 
     private val sensorManager: SensorManager = context.getSystemService(Context.SENSOR_SERVICE) as SensorManager
     private val windowManager: WindowManager = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
@@ -17,7 +21,6 @@ class OrientationSensorListener(private val context: Context, private val filter
     private val magnetometerReading = FloatArray(3)
     private val rotationMatrix = FloatArray(9)
     private val rotationMatrixAdjusted = FloatArray(9)
-    private val orientationAngles = FloatArray(3)
     private var display: Display? = null
 
     internal fun onResume() {
@@ -56,22 +59,21 @@ class OrientationSensorListener(private val context: Context, private val filter
         when (event.sensor?.type) {
             Sensor.TYPE_ACCELEROMETER -> {
                 System.arraycopy(event.values, 0, accelerometerReading, 0, accelerometerReading.size)
-                updateOrientationAngles()
+                updateOrientation()
             }
             Sensor.TYPE_MAGNETIC_FIELD -> {
                 System.arraycopy(event.values, 0, magnetometerReading, 0, magnetometerReading.size)
-                updateOrientationAngles()
+                updateOrientation()
             }
         }
     }
 
     // Compute the three orientation angles based on the most recent readings from
     // the device's accelerometer and magnetometer.
-    private fun updateOrientationAngles() {
+    private fun updateOrientation() {
         if (SensorManager.getRotationMatrix(rotationMatrix, null, accelerometerReading, magnetometerReading)) {
             val adjustedRotationMatrix = getAdjustedRotationMatrix()
-            SensorManager.getOrientation(adjustedRotationMatrix, orientationAngles)
-            filter.onOrientationAnglesChanged(adjustedRotationMatrix, orientationAngles)
+            filter.onOrientationChanged(adjustedRotationMatrix)
         }
     }
 

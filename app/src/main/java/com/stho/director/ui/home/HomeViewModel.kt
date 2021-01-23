@@ -1,7 +1,6 @@
 package com.stho.director.ui.home
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.stho.director.*
 
@@ -18,12 +17,7 @@ class HomeViewModel : ViewModel() {
     val gravityVectorLD: LiveData<Vector>
         get() = repository.gravityVectorLD
 
-    val starLD: LiveData<Star>
-        get() = repository.starLD
+    val starVectorLD: LiveData<Vector>
+        get() = repository.starVectorLD
 
-    val centerLD: LiveData<AzimuthAltitude>
-        get() = repository.centerLD
-
-    val pointerLD: LiveData<AzimuthAltitude>
-        get() = repository.pointerLD
 }

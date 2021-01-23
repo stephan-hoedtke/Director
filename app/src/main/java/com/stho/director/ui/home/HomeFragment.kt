@@ -26,9 +26,7 @@ class HomeFragment : Fragment() {
         viewModel.orientationLD.observe(viewLifecycleOwner, { orientation -> onObserveOrientation(orientation) })
         viewModel.northVectorLD.observe(viewLifecycleOwner, { vector -> onObserveNorthVector(vector) })
         viewModel.gravityVectorLD.observe(viewLifecycleOwner, { vector -> onObserveGravityVector(vector) })
-        viewModel.starLD.observe(viewLifecycleOwner, { star -> onObserveStar(star) })
-        viewModel.centerLD.observe(viewLifecycleOwner, { center -> onObserverCenter(center) })
-        viewModel.pointerLD.observe(viewLifecycleOwner, { pointer -> onObserverPointer(pointer) })
+        viewModel.starVectorLD.observe(viewLifecycleOwner, { vector -> onObserveStarVector(vector) })
 
         return binding.root
     }
@@ -43,9 +41,10 @@ class HomeFragment : Fragment() {
     }
 
     private fun onObserveOrientation(orientation: Orientation) {
-        binding.textViewAzimuth.text = Angle.toString(orientation.azimuth, Angle.AngleType.AZIMUTH)
-        binding.textViewPitch.text = Angle.toString(orientation.pitch, Angle.AngleType.PITCH)
+        binding.textViewAzimuth.text = Angle.toString(orientation.pointerAzimuth, Angle.AngleType.AZIMUTH)
+        binding.textViewPitch.text = Angle.toString(orientation.pointerAltitude, Angle.AngleType.PITCH)
         binding.textViewRoll.text = Angle.toString(orientation.roll, Angle.AngleType.ROLL)
+        binding.textViewCenter.text = Angle.toString(orientation.pointerAzimuth, orientation.pointerAltitude, Angle.AngleType.ORIENTATION)
     }
 
     private fun onObserveNorthVector(vector: Vector) {
@@ -76,23 +75,14 @@ class HomeFragment : Fragment() {
         binding.yellowPoint.translationY = -dy
     }
 
-    private fun onObserveStar(star: Star) {
+    private fun onObserveStarVector(vector: Vector) {
         val w: Double = (800.0 / 1800.0) * binding.grid.width
         val h: Double = (800.0 / 1800.0) * binding.grid.height
 
-        val dx = (star.phone.x * w).toFloat()
-        val dy = (star.phone.y * h).toFloat()
+        val dx = (vector.x * w).toFloat()
+        val dy = (vector.y * h).toFloat()
 
         binding.star.translationX = dx
         binding.star.translationY = -dy
     }
-
-    private fun onObserverCenter(center: AzimuthAltitude) {
-        binding.textViewCenter.text = Angle.toString(center.azimuth, center.altitude, Angle.AngleType.ORIENTATION)
-    }
-
-    private fun onObserverPointer(pointer: AzimuthAltitude) {
-        binding.textViewPointer.text = Angle.toString(pointer.azimuth, pointer.altitude, Angle.AngleType.ORIENTATION)
-    }
-
 }

@@ -35,7 +35,8 @@
             android:layout_height="match_parent"
             android:adjustViewBounds="true"
             android:scaleType="fitCenter"
-            android:src="@drawable/grid" />
+            android:src="@drawable/grid"
+            android:contentDescription="@string/label_empty" />
 
         <ImageView
             android:id="@+id/arrows"
@@ -43,7 +44,8 @@
             android:layout_height="match_parent"
             android:adjustViewBounds="true"
             android:scaleType="fitCenter"
-            android:src="@drawable/arrows" />
+            android:src="@drawable/arrows"
+            android:contentDescription="@string/label_empty" />
 
         <ImageView
             android:id="@+id/redPoint"
@@ -54,7 +56,8 @@
             android:translationX="90dp"
             android:translationY="50dp"
             android:alpha="0.3"
-            android:src="@drawable/red_point" />
+            android:src="@drawable/red_point"
+            android:contentDescription="@string/label_empty" />
 
         <ImageView
             android:id="@+id/orangePoint"
@@ -65,7 +68,8 @@
             android:translationX="90dp"
             android:translationY="50dp"
             android:alpha="0.7"
-            android:src="@drawable/orange_point" />
+            android:src="@drawable/orange_point"
+            android:contentDescription="@string/label_empty" />
         
         <ImageView
             android:id="@+id/yellowPoint"
@@ -75,7 +79,8 @@
             android:scaleType="fitCenter"
             android:translationX="20dp"
             android:translationY="-30dp"
-            android:src="@drawable/yellow_point" />
+            android:src="@drawable/yellow_point"
+            android:contentDescription="@string/label_empty" />
 
         <ImageView
             android:id="@+id/star"
@@ -85,8 +90,8 @@
             android:scaleType="fitCenter"
             android:translationX="-40dp"
             android:translationY="-30dp"
-            android:src="@drawable/star" />
-
+            android:src="@drawable/star"
+            android:contentDescription="@string/label_empty" />
 
     </FrameLayout>
 
@@ -182,29 +187,6 @@
         app:layout_constraintStart_toStartOf="@id/guideline1"
         android:layout_marginHorizontal="7dp"
         android:textColor="@color/white" />
-
-    <TextView
-        android:id="@+id/labelPointer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/label_pointer_colon"
-        app:layout_constraintTop_toBottomOf="@id/labelCenter"
-        app:layout_constraintEnd_toEndOf="@id/guideline1"
-        android:layout_marginTop="@dimen/vertical_paragraph_margin"
-        android:layout_marginHorizontal="7dp"
-        android:textColor="@color/white" />
-
-    <TextView
-        android:id="@+id/textViewPointer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/default_azimuth_altitude"
-        app:layout_constraintTop_toTopOf="@id/labelPointer"
-        app:layout_constraintBottom_toBottomOf="@id/labelPointer"
-        app:layout_constraintStart_toStartOf="@id/guideline1"
-        android:layout_marginHorizontal="7dp"
-        android:textColor="@color/white" />
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
